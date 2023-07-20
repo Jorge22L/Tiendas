@@ -9,4 +9,7 @@
     <string name="hint_phone">Teléfono de la tienda</string>
     <string name="hint_web">Sitio web de la Tienda</string>
     <string name="hint_photo_url">Foto de la tienda</string>
+    <string name="edit_store_title_add">Crear tienda</string>
+    <string name="menu_save">Guardar tienda</string>
+    <string name="edit_store_message_save_success">Tienda guardada correctamente</string>
 </resources>

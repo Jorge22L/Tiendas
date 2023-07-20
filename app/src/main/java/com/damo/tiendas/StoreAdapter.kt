@@ -5,6 +5,8 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
+import com.bumptech.glide.Glide
+import com.bumptech.glide.load.engine.DiskCacheStrategy
 import com.damo.tiendas.databinding.ItemStoreBinding
 
 class StoreAdapter(private var stores: MutableList<StoreEntity>, private var listener: OnClickListener) :
@@ -50,12 +52,22 @@ class StoreAdapter(private var stores: MutableList<StoreEntity>, private var lis
             setListener(store)
             binding.tvNombreTienda.text = store.name
             binding.cbFavorito.isChecked = store.isFavorite
+            Glide.with(mContext)
+                .load(store.photoUrl)
+                .diskCacheStrategy(DiskCacheStrategy.ALL)
+                .centerCrop()
+                .into(binding.imgPhoto)
         }
     }
 
     fun add(storeEntity: StoreEntity){
-        stores.add(storeEntity)
-        notifyDataSetChanged()
+        //validando si la tienda ya existe
+        if(!stores.contains(storeEntity))
+        {
+            stores.add(storeEntity)
+            notifyItemInserted(stores.size -1)
+        }
+
     }
 
     fun setStores(stores: MutableList<StoreEntity>) {
