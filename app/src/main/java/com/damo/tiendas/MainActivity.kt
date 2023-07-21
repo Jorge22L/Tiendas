@@ -6,7 +6,7 @@ import androidx.recyclerview.widget.GridLayoutManager
 import com.damo.tiendas.databinding.ActivityMainBinding
 import java.util.concurrent.LinkedBlockingQueue
 
-class MainActivity : AppCompatActivity(), OnClickListener {
+class MainActivity : AppCompatActivity(), OnClickListener, MainAux {
 
     private lateinit var binding: ActivityMainBinding
     private lateinit var mAdapter: StoreAdapter
@@ -35,10 +35,12 @@ class MainActivity : AppCompatActivity(), OnClickListener {
 
         // activity donde se lanzará el fragment
         fragmentTransaction.add(R.id.containerMain, fragment)
+        //Evitar que se salga de la app al pulsar retroceso
+        fragmentTransaction.addToBackStack(null)
         fragmentTransaction.commit()
 
         //ocultar floating action button
-        binding.fab.hide()
+        hideFab()
     }
 
     private fun setupRecyclerView() {
@@ -84,6 +86,18 @@ class MainActivity : AppCompatActivity(), OnClickListener {
     }
 
     override fun onClick(storeEntity: StoreEntity) {
+        TODO("Not yet implemented")
+    }
+
+    override fun hideFab(isVisible: Boolean) {
+        if (isVisible) binding.fab.show() else binding.fab.hide()
+    }
+
+    override fun addStore(storeEntity: StoreEntity) {
+        mAdapter.add(storeEntity)
+    }
+
+    override fun updateStore(storeEntity: StoreEntity) {
         TODO("Not yet implemented")
     }
 }
